@@ -16,7 +16,7 @@ class _HomeState extends State<Home> {
         children: [
           Container(
             width: double.infinity,
-            margin: const EdgeInsets.fromLTRB(30, 40, 30, 40),
+            margin: const EdgeInsets.fromLTRB(30, 40, 30, 20),
             child: const Text(
               "Order Status : New",
               style: TextStyle(
@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
           ),
           Container(
             width: double.infinity,
-            margin: const EdgeInsets.fromLTRB(30, 40, 30, 10),
+            margin: const EdgeInsets.fromLTRB(30, 22, 30, 0),
             child: const Text(
               'Order Type',
               style: TextStyle(
@@ -34,16 +34,19 @@ class _HomeState extends State<Home> {
                   color: Colors.black),
             ),
           ),
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildTextContainer('New :', '8'),
-                _buildTextContainer('Modify :', '11'),
-                _buildTextContainer('Suspend :', '4'),
-                _buildTextContainer('Reconnect :', '5'),
-                _buildTextContainer('Terminate :', '5'),
-              ],
+          Padding(
+            padding: const EdgeInsets.fromLTRB(30, 10, 30, 60),
+            child: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildTextContainer('New :', '8'),
+                  _buildTextContainer('Modify :', '11'),
+                  _buildTextContainer('Suspend :', '4'),
+                  _buildTextContainer('Reconnect :', '5'),
+                  _buildTextContainer('Terminate :', '5'),
+                ],
+              ),
             ),
           ),
           Container(
@@ -56,7 +59,7 @@ class _HomeState extends State<Home> {
                   color: Colors.black),
             ),
             width: double.infinity,
-            margin: const EdgeInsets.fromLTRB(55, 50, 30, 20),
+            margin: const EdgeInsets.fromLTRB(30, 0, 30, 0),
           ),
           Container(
             decoration: BoxDecoration(
@@ -64,7 +67,8 @@ class _HomeState extends State<Home> {
               border: Border.all(color: Colors.amber),
             ),
             child: DataTable1(),
-            margin: EdgeInsets.fromLTRB(55, 0, 55, 0),
+            margin: EdgeInsets.fromLTRB(30, 10, 30,
+                0), // ปรับค่า margin เพื่อให้ห่างจากขอบซ้ายและขวาทั้งคู่ละ 30
             width: double.infinity,
           ),
         ],
@@ -75,11 +79,12 @@ class _HomeState extends State<Home> {
 
 Widget _buildTextContainer(String leftText, String rightText) {
   return Container(
-    width: 200,
+    width: 280,
     height: 40,
     decoration: BoxDecoration(
-      color: Colors.yellow[600],
+      color: Color(0xFFFFEDBF),
       borderRadius: BorderRadius.circular(7),
+      border: Border.all(color: Colors.amber),
     ),
     child: Row(
       children: [
@@ -117,7 +122,7 @@ class Inprogress extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CombinedValueBarChart(
-            dataMap: {"Flutter": 100, "React": 40, "Xamarin": 40, "mind": 197},
+            dataMap: {"Flutter": 100, "React": 40, "Xamarin": 40, "4": 197},
           ),
         ],
       ),
@@ -128,10 +133,10 @@ class Inprogress extends StatelessWidget {
 class CombinedValueBarChart extends StatelessWidget {
   final Map<String, double> dataMap;
   final List<Color> colors = [
-    Color.fromARGB(255, 255, 255, 0), // สีเหลือง
-    Color.fromARGB(255, 255, 140, 0), // สีส้ม
-    Color.fromARGB(255, 138, 43, 226), // สีม่วง
-    Color.fromARGB(255, 65, 105, 225), // สีฟ้า
+    Color(0xFFF3B949), // สีเหลือง
+    Color(0xFFEB894E), // สีส้ม
+    Color(0xFFB182BF),
+    Color(0xFF7BB6E8),
   ];
 
   CombinedValueBarChart({Key? key, required this.dataMap}) : super(key: key);
@@ -152,6 +157,7 @@ class CombinedValueBarChart extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: colors[index % colors.length],
                 ),
+                margin: EdgeInsets.symmetric(horizontal: 0.5),
               ),
             );
           }).toList(),
@@ -205,8 +211,8 @@ class Inprogress2 extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CombinedValueBarChart(
-            dataMap: {"Flutter": 100, "React": 40, "Xamarin": 40, "mind": 197},
+          CombinedValueBarChart2(
+            dataMap: {"Flutter": 100, "React": 160, "Xamarin": 40, "4": 77},
           ),
         ],
       ),
@@ -217,10 +223,10 @@ class Inprogress2 extends StatelessWidget {
 class CombinedValueBarChart2 extends StatelessWidget {
   final Map<String, double> dataMap;
   final List<Color> colors = [
-    Color.fromARGB(255, 255, 255, 0), // สีเหลือง
-    Color.fromARGB(255, 255, 140, 0), // สีส้ม
-    Color.fromARGB(255, 138, 43, 226), // สีม่วง
-    Color.fromARGB(255, 65, 105, 225), // สีฟ้า
+    Color(0xFFF3B949), // สีเหลือง
+    Color(0xFFB182BF),
+    Color(0xFF7BB6E8),
+    Color(0xFF80BE5B),
   ];
 
   CombinedValueBarChart2({Key? key, required this.dataMap}) : super(key: key);
@@ -241,6 +247,495 @@ class CombinedValueBarChart2 extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: colors[index % colors.length],
                 ),
+                margin: EdgeInsets.symmetric(horizontal: 0.5),
+              ),
+            );
+          }).toList(),
+        ),
+        SizedBox(height: 16),
+      ],
+    );
+  }
+}
+
+class Inprogress3 extends StatelessWidget {
+  const Inprogress3({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CombinedValueBarChart3(
+            dataMap: {
+              "Flutter": 100,
+              "React": 60,
+              "Xamarin": 117,
+              "4": 40,
+              "5": 59,
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CombinedValueBarChart3 extends StatelessWidget {
+  final Map<String, double> dataMap;
+  final List<Color> colors = [
+    Color(0xFFF3B949), // สีเหลือง
+    Color(0xFFEB894E), // สีส้ม
+    Color(0xFFB182BF),
+    Color(0xFF7BB6E8),
+    Color(0xFF80BE5B),
+  ];
+
+  CombinedValueBarChart3({Key? key, required this.dataMap}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double totalValue = dataMap.values.reduce((a, b) => a + b);
+
+    return Column(
+      children: [
+        Row(
+          children: dataMap.keys.map((key) {
+            int index = dataMap.keys.toList().indexOf(key);
+            return Expanded(
+              flex: (dataMap[key]! / totalValue * 100).toInt(),
+              child: Container(
+                height: 12,
+                decoration: BoxDecoration(
+                  color: colors[index % colors.length],
+                ),
+                margin: EdgeInsets.symmetric(horizontal: 0.5),
+              ),
+            );
+          }).toList(),
+        ),
+        SizedBox(height: 16),
+      ],
+    );
+  }
+}
+
+class Inprogress4 extends StatelessWidget {
+  const Inprogress4({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CombinedValueBarChart4(
+            dataMap: {
+              "Flutter": 80,
+              "React": 14,
+              "Xamarin": 60,
+              "4": 12,
+              "5": 210,
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CombinedValueBarChart4 extends StatelessWidget {
+  final Map<String, double> dataMap;
+  final List<Color> colors = [
+    Color(0xFFF3B949), // สีเหลือง
+    Color(0xFFEB894E), // สีส้ม
+    Color(0xFFB182BF),
+    Color(0xFF7BB6E8),
+    Color(0xFF80BE5B),
+  ];
+
+  CombinedValueBarChart4({Key? key, required this.dataMap}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double totalValue = dataMap.values.reduce((a, b) => a + b);
+
+    return Column(
+      children: [
+        Row(
+          children: dataMap.keys.map((key) {
+            int index = dataMap.keys.toList().indexOf(key);
+            return Expanded(
+              flex: (dataMap[key]! / totalValue * 100).toInt(),
+              child: Container(
+                height: 12,
+                decoration: BoxDecoration(
+                  color: colors[index % colors.length],
+                ),
+                margin: EdgeInsets.symmetric(horizontal: 0.5),
+              ),
+            );
+          }).toList(),
+        ),
+        SizedBox(height: 16),
+      ],
+    );
+  }
+}
+
+class Inprogress5 extends StatelessWidget {
+  const Inprogress5({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CombinedValueBarChart5(
+            dataMap: {
+              "Flutter": 89,
+              "React": 290,
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CombinedValueBarChart5 extends StatelessWidget {
+  final Map<String, double> dataMap;
+  final List<Color> colors = [
+    // สีเหลือง
+    Color(0xFFEB894E),
+    Color(0xFF80BE5B),
+  ];
+
+  CombinedValueBarChart5({Key? key, required this.dataMap}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double totalValue = dataMap.values.reduce((a, b) => a + b);
+
+    return Column(
+      children: [
+        Row(
+          children: dataMap.keys.map((key) {
+            int index = dataMap.keys.toList().indexOf(key);
+            return Expanded(
+              flex: (dataMap[key]! / totalValue * 100).toInt(),
+              child: Container(
+                height: 12,
+                decoration: BoxDecoration(
+                  color: colors[index % colors.length],
+                ),
+                margin: EdgeInsets.symmetric(horizontal: 0.5),
+              ),
+            );
+          }).toList(),
+        ),
+        SizedBox(height: 16),
+      ],
+    );
+  }
+}
+
+class Inprogress6 extends StatelessWidget {
+  const Inprogress6({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CombinedValueBarChart6(
+            dataMap: {
+              "Flutter": 100,
+              "React": 40,
+              "Xamarin": 50,
+              "4": 187,
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CombinedValueBarChart6 extends StatelessWidget {
+  final Map<String, double> dataMap;
+  final List<Color> colors = [
+    Color(0xFFF3B949), // สีเหลือง
+    Color(0xFFEB894E), // สีส้ม
+    Color(0xFFB182BF),
+    Color(0xFF7BB6E8),
+  ];
+
+  CombinedValueBarChart6({Key? key, required this.dataMap}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double totalValue = dataMap.values.reduce((a, b) => a + b);
+
+    return Column(
+      children: [
+        Row(
+          children: dataMap.keys.map((key) {
+            int index = dataMap.keys.toList().indexOf(key);
+            return Expanded(
+              flex: (dataMap[key]! / totalValue * 100).toInt(),
+              child: Container(
+                height: 12,
+                decoration: BoxDecoration(
+                  color: colors[index % colors.length],
+                ),
+                margin: EdgeInsets.symmetric(horizontal: 0.5),
+              ),
+            );
+          }).toList(),
+        ),
+        SizedBox(height: 16),
+      ],
+    );
+  }
+}
+
+class Inprogress7 extends StatelessWidget {
+  const Inprogress7({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CombinedValueBarChart7(
+            dataMap: {
+              "Flutter": 100,
+              "React": 60,
+              "Xamarin": 218,
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CombinedValueBarChart7 extends StatelessWidget {
+  final Map<String, double> dataMap;
+  final List<Color> colors = [
+    Color(0xFF7BB6E8),
+    Color(0xFF80BE5B),
+  ];
+
+  CombinedValueBarChart7({Key? key, required this.dataMap}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double totalValue = dataMap.values.reduce((a, b) => a + b);
+
+    return Column(
+      children: [
+        Row(
+          children: dataMap.keys.map((key) {
+            int index = dataMap.keys.toList().indexOf(key);
+            return Expanded(
+              flex: (dataMap[key]! / totalValue * 100).toInt(),
+              child: Container(
+                height: 12,
+                decoration: BoxDecoration(
+                  color: colors[index % colors.length],
+                ),
+                margin: EdgeInsets.symmetric(horizontal: 0.5),
+              ),
+            );
+          }).toList(),
+        ),
+        SizedBox(height: 16),
+      ],
+    );
+  }
+}
+
+class Inprogress8 extends StatelessWidget {
+  const Inprogress8({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CombinedValueBarChart8(
+            dataMap: {
+              "Flutter": 100,
+              "React": 40,
+              "Xamarin": 238,
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CombinedValueBarChart8 extends StatelessWidget {
+  final Map<String, double> dataMap;
+  final List<Color> colors = [
+    Color(0xFFF3B949), // สีเหลือง
+    Color(0xFFEB894E), // สีส้ม
+    Color(0xFF80BE5B),
+  ];
+
+  CombinedValueBarChart8({Key? key, required this.dataMap}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double totalValue = dataMap.values.reduce((a, b) => a + b);
+
+    return Column(
+      children: [
+        Row(
+          children: dataMap.keys.map((key) {
+            int index = dataMap.keys.toList().indexOf(key);
+            return Expanded(
+              flex: (dataMap[key]! / totalValue * 100).toInt(),
+              child: Container(
+                height: 12,
+                decoration: BoxDecoration(
+                  color: colors[index % colors.length],
+                ),
+                margin: EdgeInsets.symmetric(horizontal: 0.5),
+              ),
+            );
+          }).toList(),
+        ),
+        SizedBox(height: 16),
+      ],
+    );
+  }
+}
+
+class Inprogress9 extends StatelessWidget {
+  const Inprogress9({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CombinedValueBarChart9(
+            dataMap: {
+              "Flutter": 40,
+              "React": 160,
+              "Xamarin": 178,
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CombinedValueBarChart9 extends StatelessWidget {
+  final Map<String, double> dataMap;
+  final List<Color> colors = [
+    Color(0xFFEB894E), // สีส้ม
+    Color(0xFFB182BF),
+    Color(0xFF80BE5B),
+  ];
+
+  CombinedValueBarChart9({Key? key, required this.dataMap}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double totalValue = dataMap.values.reduce((a, b) => a + b);
+
+    return Column(
+      children: [
+        Row(
+          children: dataMap.keys.map((key) {
+            int index = dataMap.keys.toList().indexOf(key);
+            return Expanded(
+              flex: (dataMap[key]! / totalValue * 100).toInt(),
+              child: Container(
+                height: 12,
+                decoration: BoxDecoration(
+                  color: colors[index % colors.length],
+                ),
+                margin: EdgeInsets.symmetric(horizontal: 0.5),
+              ),
+            );
+          }).toList(),
+        ),
+        SizedBox(height: 16),
+      ],
+    );
+  }
+}
+
+class Inprogress10 extends StatelessWidget {
+  const Inprogress10({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CombinedValueBarChart10(
+            dataMap: {
+              "Flutter": 148,
+              "React": 40,
+              "Xamarin": 190,
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CombinedValueBarChart10 extends StatelessWidget {
+  final Map<String, double> dataMap;
+  final List<Color> colors = [
+    Color(0xFFF3B949), // สีเหลือง
+    Color(0xFFEB894E), // สีส้ม
+    Color(0xFF7BB6E8),
+  ];
+
+  CombinedValueBarChart10({Key? key, required this.dataMap}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double totalValue = dataMap.values.reduce((a, b) => a + b);
+
+    return Column(
+      children: [
+        Row(
+          children: dataMap.keys.map((key) {
+            int index = dataMap.keys.toList().indexOf(key);
+            return Expanded(
+              flex: (dataMap[key]! / totalValue * 100).toInt(),
+              child: Container(
+                height: 12,
+                decoration: BoxDecoration(
+                  color: colors[index % colors.length],
+                ),
+                margin: EdgeInsets.symmetric(horizontal: 0.5),
               ),
             );
           }).toList(),
@@ -265,54 +760,75 @@ class DataTable1 extends StatelessWidget {
         columns: const <DataColumn>[
           DataColumn(
             label: Expanded(
-              child: Icon(Icons.star, color: Colors.amber),
-            ),
-          ),
-          DataColumn(
-            label: Expanded(
-              child: Text(
-                'Order Number',
-                style: TextStyle(color: Colors.white),
+              child: Icon(
+                Icons.star_border,
+                color: Colors.white,
+                size: 28,
               ),
             ),
           ),
           DataColumn(
             label: Expanded(
-              child: Text(
-                'Order Type',
-                style: TextStyle(color: Colors.white),
+              child: SizedBox(
+                width: 100,
+                child: Text(
+                  'Order Number',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ),
           DataColumn(
             label: Expanded(
-              child: Text(
-                'Role',
-                style: TextStyle(color: Colors.white),
+              child: SizedBox(
+                width: 100,
+                child: Text(
+                  'Order Type',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ),
           DataColumn(
             label: Expanded(
-              child: Text(
-                'Customer Name',
-                style: TextStyle(color: Colors.white),
+              child: SizedBox(
+                  width: 120,
+                  child: Text(
+                    'Order Sub Type',
+                    style: TextStyle(color: Colors.white),
+                  )),
+            ),
+          ),
+          DataColumn(
+            label: Expanded(
+              child: SizedBox(
+                width: 210,
+                child: Text(
+                  'Customer Name',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ),
           DataColumn(
             label: Expanded(
-              child: Text(
-                'Billing Account Number',
-                style: TextStyle(color: Colors.white),
+              child: SizedBox(
+                width: 132,
+                child: Text(
+                  'Billing Account Number',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ),
           DataColumn(
             label: Expanded(
-              child: Text(
-                'Item Status',
-                style: TextStyle(color: Colors.white),
+              child: SizedBox(
+                width: 380,
+                child: Text(
+                  'Item Status',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ),
@@ -323,27 +839,238 @@ class DataTable1 extends StatelessWidget {
               DataCell(Icon(
                 Icons.star,
                 color: Colors.amber,
+                size: 28,
               )),
               DataCell(Text('1234567890')),
               DataCell(Text('New')),
               DataCell(Text('-')),
-              DataCell(Text('xxx xxx')),
+              DataCell(Text('xxxxxxxxxxxxx xxxxxxxxxxxxx')),
               DataCell(Text('1234567890')),
               DataCell(Flexible(child: Inprogress())),
             ],
           ),
           DataRow(
             cells: <DataCell>[
-              DataCell(Icon(
-                Icons.star,
-                color: Colors.amber,
-              )),
+              DataCell(
+                Stack(
+                  children: [
+                    Icon(
+                      Icons.star_border,
+                      color: Colors.black,
+                      size: 28,
+                    ),
+                    Positioned.fill(
+                      child: Icon(
+                        Icons.star,
+                        color: Colors.white,
+                        size: 15,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               DataCell(Text('1234567890')),
               DataCell(Text('New')),
               DataCell(Text('-')),
-              DataCell(Text('xxx xxx')),
+              DataCell(Text('xxxxxxxxxxxxx xxxxxxxxxxxxx')),
               DataCell(Text('1234567890')),
-              DataCell(Inprogress()),
+              DataCell(Inprogress2()),
+            ],
+          ),
+          DataRow(
+            cells: <DataCell>[
+              DataCell(
+                Stack(
+                  children: [
+                    Icon(
+                      Icons.star_border,
+                      color: Colors.black,
+                      size: 28,
+                    ),
+                    Positioned.fill(
+                      child: Icon(
+                        Icons.star,
+                        color: Colors.white,
+                        size: 15,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              DataCell(Text('1234567890')),
+              DataCell(Text('New')),
+              DataCell(Text('-')),
+              DataCell(Text('xxxxxxxxxxxxx xxxxxxxxxxxxx')),
+              DataCell(Text('1234567890')),
+              DataCell(Inprogress3()),
+            ],
+          ),
+          DataRow(
+            cells: <DataCell>[
+              DataCell(
+                Stack(
+                  children: [
+                    Icon(
+                      Icons.star_border,
+                      color: Colors.black,
+                      size: 28,
+                    ),
+                    Positioned.fill(
+                      child: Icon(
+                        Icons.star,
+                        color: Colors.white,
+                        size: 15,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              DataCell(Text('1234567890')),
+              DataCell(Text('Modify')),
+              DataCell(Text('-')),
+              DataCell(Text('xxxxxxxxxxxxx xxxxxxxxxxxxx')),
+              DataCell(Text('1234567890')),
+              DataCell(Inprogress4()),
+            ],
+          ),
+          DataRow(
+            cells: <DataCell>[
+              DataCell(
+                Stack(
+                  children: [
+                    Icon(
+                      Icons.star_border,
+                      color: Colors.black,
+                      size: 28,
+                    ),
+                    Positioned.fill(
+                      child: Icon(
+                        Icons.star,
+                        color: Colors.white,
+                        size: 15,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              DataCell(Text('1234567890')),
+              DataCell(Text('Modify')),
+              DataCell(Text('-')),
+              DataCell(Text('xxxxxxxxxxxxx xxxxxxxxxxxxx')),
+              DataCell(Text('1234567890')),
+              DataCell(Inprogress5()),
+            ],
+          ),
+          DataRow(
+            cells: <DataCell>[
+              DataCell(
+                Stack(
+                  children: [
+                    Icon(
+                      Icons.star_border,
+                      color: Colors.black,
+                      size: 28,
+                    ),
+                    Positioned.fill(
+                      child: Icon(
+                        Icons.star,
+                        color: Colors.white,
+                        size: 15,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              DataCell(Text('1234567890')),
+              DataCell(Text('Modify')),
+              DataCell(Text('-')),
+              DataCell(Text('xxxxxxxxxxxxx xxxxxxxxxxxxx')),
+              DataCell(Text('1234567890')),
+              DataCell(Inprogress6()),
+            ],
+          ),
+          DataRow(
+            cells: <DataCell>[
+              DataCell(
+                Stack(
+                  children: [
+                    Icon(
+                      Icons.star_border,
+                      color: Colors.black,
+                      size: 28,
+                    ),
+                    Positioned.fill(
+                      child: Icon(
+                        Icons.star,
+                        color: Colors.white,
+                        size: 15,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              DataCell(Text('1234567890')),
+              DataCell(Text('Terminate')),
+              DataCell(Text('-')),
+              DataCell(Text('xxxxxxxxxxxxx xxxxxxxxxxxxx')),
+              DataCell(Text('1234567890')),
+              DataCell(Inprogress7()),
+            ],
+          ),
+          DataRow(
+            cells: <DataCell>[
+              DataCell(
+                Stack(
+                  children: [
+                    Icon(
+                      Icons.star_border,
+                      color: Colors.black,
+                      size: 28,
+                    ),
+                    Positioned.fill(
+                      child: Icon(
+                        Icons.star,
+                        color: Colors.white,
+                        size: 15,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              DataCell(Text('1234567890')),
+              DataCell(Text('Reconnect')),
+              DataCell(Text('-')),
+              DataCell(Text('xxxxxxxxxxxxx xxxxxxxxxxxxx')),
+              DataCell(Text('1234567890')),
+              DataCell(Inprogress8()),
+            ],
+          ),
+          DataRow(
+            cells: <DataCell>[
+              DataCell(
+                Stack(
+                  children: [
+                    Icon(
+                      Icons.star_border,
+                      color: Colors.black,
+                      size: 28,
+                    ),
+                    Positioned.fill(
+                      child: Icon(
+                        Icons.star,
+                        color: Colors.white,
+                        size: 15,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              DataCell(Text('1234567890')),
+              DataCell(Text('Terminate')),
+              DataCell(Text('-')),
+              DataCell(Text('xxxxxxxxxxxxx xxxxxxxxxxxxx')),
+              DataCell(Text('1234567890')),
+              DataCell(Inprogress9()),
             ],
           ),
           DataRow(
@@ -353,109 +1080,11 @@ class DataTable1 extends StatelessWidget {
                 color: Colors.amber,
               )),
               DataCell(Text('1234567890')),
-              DataCell(Text('New')),
+              DataCell(Text('Suspend')),
               DataCell(Text('-')),
-              DataCell(Text('xxx xxx')),
+              DataCell(Text('xxxxxxxxxxxxx xxxxxxxxxxxxx')),
               DataCell(Text('1234567890')),
-              DataCell(Inprogress()),
-            ],
-          ),
-          DataRow(
-            cells: <DataCell>[
-              DataCell(Icon(
-                Icons.star,
-                color: Colors.amber,
-              )),
-              DataCell(Text('1234567890')),
-              DataCell(Text('New')),
-              DataCell(Text('-')),
-              DataCell(Text('xxx xxx')),
-              DataCell(Text('1234567890')),
-              DataCell(Inprogress()),
-            ],
-          ),
-          DataRow(
-            cells: <DataCell>[
-              DataCell(Icon(
-                Icons.star,
-                color: Colors.amber,
-              )),
-              DataCell(Text('1234567890')),
-              DataCell(Text('New')),
-              DataCell(Text('-')),
-              DataCell(Text('xxx xxx')),
-              DataCell(Text('1234567890')),
-              DataCell(Inprogress()),
-            ],
-          ),
-          DataRow(
-            cells: <DataCell>[
-              DataCell(Icon(
-                Icons.star,
-                color: Colors.amber,
-              )),
-              DataCell(Text('1234567890')),
-              DataCell(Text('New')),
-              DataCell(Text('-')),
-              DataCell(Text('xxx xxx')),
-              DataCell(Text('1234567890')),
-              DataCell(Inprogress()),
-            ],
-          ),
-          DataRow(
-            cells: <DataCell>[
-              DataCell(Icon(
-                Icons.star,
-                color: Colors.amber,
-              )),
-              DataCell(Text('1234567890')),
-              DataCell(Text('New')),
-              DataCell(Text('-')),
-              DataCell(Text('xxx xxx')),
-              DataCell(Text('1234567890')),
-              DataCell(Inprogress()),
-            ],
-          ),
-          DataRow(
-            cells: <DataCell>[
-              DataCell(Icon(
-                Icons.star,
-                color: Colors.amber,
-              )),
-              DataCell(Text('1234567890')),
-              DataCell(Text('New')),
-              DataCell(Text('-')),
-              DataCell(Text('xxx xxx')),
-              DataCell(Text('1234567890')),
-              DataCell(Inprogress()),
-            ],
-          ),
-          DataRow(
-            cells: <DataCell>[
-              DataCell(Icon(
-                Icons.star,
-                color: Colors.amber,
-              )),
-              DataCell(Text('1234567890')),
-              DataCell(Text('New')),
-              DataCell(Text('-')),
-              DataCell(Text('xxx xxx')),
-              DataCell(Text('1234567890')),
-              DataCell(Inprogress()),
-            ],
-          ),
-          DataRow(
-            cells: <DataCell>[
-              DataCell(Icon(
-                Icons.star,
-                color: Colors.amber,
-              )),
-              DataCell(Text('1234567890')),
-              DataCell(Text('New')),
-              DataCell(Text('-')),
-              DataCell(Text('xxx xxx')),
-              DataCell(Text('1234567890')),
-              DataCell(Inprogress()),
+              DataCell(Inprogress10()),
             ],
           ),
         ],
@@ -463,29 +1092,32 @@ class DataTable1 extends StatelessWidget {
       Divider(),
       Container(
           child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Spacer(),
           Container(
-            child: Row(
-              children: [
-                Text(
-                  "Total 28 records",
-                )
-              ],
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(
+                  0, 0, 700, 0), // กำหนดระยะห่างขอบขวา
+              child: Text(
+                "Total 28 records",
+              ),
             ),
           ),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.black), // เพิ่มเส้นขอบ
+              border: Border.all(color: Color(0xFFFECE00)), // เพิ่มเส้นขอบ
             ),
             child: ClipRRect(
               borderRadius:
                   BorderRadius.circular(10), // กำหนดให้มีโค้งตามต้องการ
               child: TextButton(
                 onPressed: () {},
-                child: Icon(Icons.arrow_back_ios_new_rounded),
+                child: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: Color(0xFFFECE00),
+                ),
               ),
             ),
           ),
@@ -507,17 +1139,21 @@ class DataTable1 extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.black), // เพิ่มเส้นขอบ
+                    border:
+                        Border.all(color: Color(0xFFFECE00)), // เพิ่มเส้นขอบ
                   ),
                   child: ClipRRect(
                     borderRadius:
                         BorderRadius.circular(10), // กำหนดให้มีโค้งตามต้องการ
                     child: TextButton(
                       onPressed: () {},
-                      child: Icon(Icons.arrow_forward_rounded),
+                      child: Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: Color(0xFFFECE00),
+                      ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -530,19 +1166,19 @@ class DataTable1 extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border:
-                      Border.all(color: Colors.yellow), // เพิ่มเส้นขอบสีเหลือง
+                      Border.all(color: Colors.amber), // เพิ่มเส้นขอบสีเหลือง
                 ),
                 padding: EdgeInsets.symmetric(
-                  vertical: 8,
-                  horizontal: 16,
+                  vertical: 2,
+                  horizontal: 22,
                 ), // เพิ่มระยะห่างของข้อความ
 
                 child: Text(
-                  '',
+                  '10 / Page',
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
-                    fontSize: 18,
+                    fontSize: 12,
                   ),
                 ),
               ),
@@ -565,7 +1201,7 @@ class DataTable1 extends StatelessWidget {
             width: 12,
           ),
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.fromLTRB(0, 0, 40, 0),
             child: SizedBox(
               width: 100,
               height: 25,
@@ -573,14 +1209,21 @@ class DataTable1 extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border:
-                      Border.all(color: Colors.yellow), // เพิ่มเส้นขอบสีเหลือง
+                      Border.all(color: Colors.amber), // เพิ่มเส้นขอบสีเหลือง
                 ),
                 padding: EdgeInsets.symmetric(
                   vertical: 8,
                   horizontal: 16,
                 ), // เพิ่มระยะห่างของข้อความ
-                child: Text(
-                  '',
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: '', // ใส่ข้อความ placeholder ที่คุณต้องการ
+                    hintStyle: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
