@@ -162,6 +162,95 @@ class CombinedValueBarChart extends StatelessWidget {
   }
 }
 
+Widget _buildTextContainer2(String leftText, String rightText) {
+  return Container(
+    width: 200,
+    height: 40,
+    decoration: BoxDecoration(
+      color: Colors.yellow[600],
+      borderRadius: BorderRadius.circular(7),
+    ),
+    child: Row(
+      children: [
+        Container(
+          alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.only(left: 10),
+          child: Text(
+            leftText,
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
+        Spacer(),
+        if (rightText.isNotEmpty)
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.only(right: 10),
+            child: Text(
+              rightText,
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+      ],
+    ),
+  );
+}
+
+class Inprogress2 extends StatelessWidget {
+  const Inprogress2({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CombinedValueBarChart(
+            dataMap: {"Flutter": 100, "React": 40, "Xamarin": 40, "mind": 197},
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CombinedValueBarChart2 extends StatelessWidget {
+  final Map<String, double> dataMap;
+  final List<Color> colors = [
+    Color.fromARGB(255, 255, 255, 0), // สีเหลือง
+    Color.fromARGB(255, 255, 140, 0), // สีส้ม
+    Color.fromARGB(255, 138, 43, 226), // สีม่วง
+    Color.fromARGB(255, 65, 105, 225), // สีฟ้า
+  ];
+
+  CombinedValueBarChart2({Key? key, required this.dataMap}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double totalValue = dataMap.values.reduce((a, b) => a + b);
+
+    return Column(
+      children: [
+        Row(
+          children: dataMap.keys.map((key) {
+            int index = dataMap.keys.toList().indexOf(key);
+            return Expanded(
+              flex: (dataMap[key]! / totalValue * 100).toInt(),
+              child: Container(
+                height: 12,
+                decoration: BoxDecoration(
+                  color: colors[index % colors.length],
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+        SizedBox(height: 16),
+      ],
+    );
+  }
+}
+
 class DataTable1 extends StatelessWidget {
   const DataTable1({super.key});
 
