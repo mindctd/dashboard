@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class Home2 extends StatefulWidget {
@@ -8,6 +9,7 @@ class Home2 extends StatefulWidget {
 }
 
 class _Home2State extends State<Home2> {
+  int selectedRadio = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +19,8 @@ class _Home2State extends State<Home2> {
             padding: const EdgeInsets.fromLTRB(20, 16, 0, 16),
             child: Text(
               "Transfer Approval Task",
-              style: TextStyle(fontSize: 24, color: Colors.amber),
+              style: TextStyle(
+                  fontSize: 24, color: Colors.amber, fontFamily: NT()),
             ),
           ),
           backgroundColor: Color.fromARGB(255, 255, 248, 226),
@@ -32,15 +35,24 @@ class _Home2State extends State<Home2> {
                     children: [
                       Radio(
                         value: 1,
-                        groupValue: 0,
-                        onChanged: (value) {},
+                        groupValue: selectedRadio,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedRadio = value as int;
+                          });
+                        },
+                        activeColor: Colors.amber,
                       ),
                       Text("Search by Employee"),
                       Radio(
                         value: 2,
-                        groupValue: 2,
-                        onChanged: (value) {},
-                        activeColor: (Color(0xFFFECE00)),
+                        groupValue: selectedRadio,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedRadio = value as int;
+                          });
+                        },
+                        activeColor: Colors.amber,
                       ),
                       Text("Search by Employee")
                     ],
@@ -142,7 +154,7 @@ class _Home2State extends State<Home2> {
                             child: TextButton(
                               onPressed: () {},
                               child: Text(
-                                "Cancle",
+                                "Cancel",
                                 style: TextStyle(
                                     color: Color(0xFFFECE00),
                                     fontWeight: FontWeight.bold),
@@ -185,119 +197,85 @@ class _Home2State extends State<Home2> {
   }
 }
 
-class DataTable1 extends StatelessWidget {
+class DataTable1 extends StatefulWidget {
   const DataTable1({super.key});
 
+  @override
+  State<DataTable1> createState() => _DataTable1State();
+}
+
+int list = 10;
+List<Color> rowColors = List<Color>.generate(list, (index) => Colors.white);
+List<bool> showIcon = List<bool>.generate(list, (index) => false);
+
+class _DataTable1State extends State<DataTable1> {
   @override
   Widget build(BuildContext context) {
     double rowHeight = (MediaQuery.of(context).size.height - 56) / 10;
     return Theme(
       data: Theme.of(context).copyWith(
-        dividerColor: Colors.amber, // เปลี่ยนสีของเส้นแบ่ง
+        dividerColor: Colors.amber,
       ),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Color(0xFFFECE00)),
-          // เพิ่มสีพื้นหลัง
+          border: Border.all(
+            color: Color(0xFFFECE00),
+          ),
         ),
         child:
             Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
           DataTable(
-            dataRowMaxHeight: rowHeight,
-            headingRowColor: MaterialStateColor.resolveWith(
-                (states) => Colors.grey.withOpacity(0.2)),
-            columns: const <DataColumn>[
-              DataColumn(
-                label: Expanded(
-                  child: SizedBox(
-                    width: 1320,
-                    child: Text(
-                      'Approval Group',
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
+              showCheckboxColumn: false,
+              dataRowMaxHeight: rowHeight,
+              headingRowColor: MaterialStateColor.resolveWith(
+                  (states) => Colors.grey.withOpacity(0.2)),
+              columns: const <DataColumn>[
+                DataColumn(
+                  label: Expanded(
+                    child: SizedBox(
+                      width: 1320,
+                      child: Text(
+                        'Approval Group',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              DataColumn(
-                label: Expanded(
-                  child: SizedBox(
-                    width: 76,
-                    child: Text(
-                      '',
-                      style: TextStyle(color: Colors.white),
+                DataColumn(
+                  label: Expanded(
+                    child: SizedBox(
+                      width: 76,
+                      child: Text(
+                        '',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-            rows: <DataRow>[
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('Group Marketing')),
-                  DataCell(Text('')),
-                ],
-              ),
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('Group Marketing')),
-                  DataCell(Text('')),
-                ],
-              ),
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('Group Marketing')),
-                  DataCell(Icon(
-                    Icons.check,
-                    color: Color(0xFFFECE00),
-                  )),
-                ],
-              ),
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('Group Marketing')),
-                  DataCell(Text('')),
-                ],
-              ),
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('Group Marketing')),
-                  DataCell(Text('')),
-                ],
-              ),
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('Group Marketing')),
-                  DataCell(Text('')),
-                ],
-              ),
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('Group Marketing')),
-                  DataCell(Text('')),
-                ],
-              ),
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('Group Marketing')),
-                  DataCell(Text('')),
-                ],
-              ),
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('Group Marketing')),
-                  DataCell(Text('')),
-                ],
-              ),
-              DataRow(
-                cells: <DataCell>[
-                  DataCell(Text('Group Marketing')),
-                  DataCell(Text('')),
-                ],
-              ),
-            ],
-          ),
+              ],
+              rows: List<DataRow>.generate(
+                  10,
+                  (index) => DataRow(
+                          color: MaterialStateProperty.resolveWith((states) {
+                            return rowColors[index];
+                          }),
+                          onSelectChanged: (value) {
+                            setState(() {
+                              rowColors[index] =
+                                  rowColors[index] == Colors.white
+                                      ? Color.fromRGBO(252, 182, 0, 0.03)
+                                      : Colors.white;
+                              showIcon[index] = !showIcon[index];
+                            });
+                          },
+                          cells: [
+                            DataCell(Text('Group Marketing')),
+                            DataCell(showIcon[index]
+                                ? Icon(Icons.check)
+                                : SizedBox()),
+                          ]))),
           Divider(),
           Container(
               height: 57,
