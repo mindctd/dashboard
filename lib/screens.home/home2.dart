@@ -20,14 +20,14 @@ class _Home2State extends State<Home2> {
             child: Text(
               "Transfer Approval Task",
               style: TextStyle(
-                  fontSize: 24, color: Colors.amber, fontFamily: NT()),
+                  fontSize: 24, color: Colors.amber, fontFamily: 'NT'),
             ),
           ),
           backgroundColor: Color.fromARGB(255, 255, 248, 226),
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(40, 20, 0, 0),
+            padding: const EdgeInsets.fromLTRB(40, 20, 40, 0),
             child: Container(
               child: Column(
                 children: [
@@ -66,20 +66,18 @@ class _Home2State extends State<Home2> {
                   ),
                   Row(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 7, 0, 0),
-                        child: Container(
-                          width: 1325,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: Colors.grey),
-                          ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 7, 0, 0),
                           child: TextField(
                             decoration: InputDecoration(
                               hintText: 'Please select', // ข้อความ hint
-
-                              border: InputBorder.none,
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                              // border: InputBorder.none,
 
                               // ไม่มีเส้นขอบสำหรับ TextField
                               contentPadding:
@@ -114,13 +112,7 @@ class _Home2State extends State<Home2> {
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 70, 0),
-                      child: Container(
-                        width: 1700,
-                        child: Divider(),
-                      ),
-                    ),
+                    child: Divider(),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -130,13 +122,13 @@ class _Home2State extends State<Home2> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 8, 40, 0),
+                    padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
                     child: Container(
                       child: DataTable1(),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 40, 40, 0),
+                    padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [

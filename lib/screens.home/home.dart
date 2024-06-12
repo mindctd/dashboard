@@ -1094,11 +1094,10 @@ class DataTable1 extends StatelessWidget {
           child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Spacer(),
-          Container(
+          Expanded(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(
-                  0, 0, 700, 0), // กำหนดระยะห่างขอบขวา
+              padding:
+                  const EdgeInsets.fromLTRB(40, 0, 0, 0), // กำหนดระยะห่างขอบขวา
               child: Text(
                 "Total 28 records",
               ),
@@ -1232,6 +1231,10 @@ class DataTable1 extends StatelessWidget {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 40, 0),
+            child: Text("page"),
+          )
         ],
       ))
     ]);
